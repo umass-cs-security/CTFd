@@ -1,0 +1,3 @@
+[submodule "CTFd/plugins/docker_challenges"]
+	path = CTFd/plugins/docker_challenges
+	url = https://github.com/umass-cs-security/CTFd-Docker-Challenges.git
