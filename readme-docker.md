@@ -1,6 +1,9 @@
 # Changes
 
 - docker challenge
+  - add dynamic flag for container with ENV ```"FLAG={original flag}_{generated flag}"```
+    - all challenge must access environment variable FLAG and manage their CTF accordingly
+    - TODO: ```meta.yaml``` is allowed to not specify ```flag``` field. A completely generated flag will be issued to challenge
   - admin_docker_import.html
     - new end-point for import docker challenge from yaml file
     - require additional python package ```pyyaml```
