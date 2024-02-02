@@ -2,6 +2,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--port", help="Port for debug server to listen on", default=4000)
+parser.add_argument("--host", help="Host name for debug server to listen on", default="127.0.0.1")
 parser.add_argument(
     "--profile", help="Enable flask_profiler profiling", action="store_true"
 )
@@ -40,4 +41,4 @@ if args.profile:
     toolbar.init_app(app)
     print(" * Flask profiling running at http://127.0.0.1:4000/flask-profiler/")
 
-app.run(debug=True, threaded=True, host="127.0.0.1", port=args.port)
+app.run(debug=True, threaded=True, host=args.host, port=args.port)

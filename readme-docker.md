@@ -14,10 +14,16 @@
     - CTFd/themes/core/templates/
     - CTFd/themes/admin/templates/
     - CTFd/themes/core-beta/templates/ (this seems to be the one that has been used)
+  - TODO: Add script ```view.js``` synced rather than async. User should direct see container info rather than click button to see it. (The problem is from the default behavior of ctfd platform not in script.)
 
 # Setup
 
 - docker registry
+  - modify/create ```/etc/docker/daemon.json``` to allow docker engine manage localhost registry
+    - ```{"insecure-registries" : [ "localhost:56156" ]}``` 
+    - ```sudo systemctl daemon-reload```
+    - ```sudo systemctl restart docker```
+  - TODO: if registry is privileged, all image and ctfd platform also need to be privileged. (in other cases, either image will not be pushed to registry or platform cannot access/find images in registry.)
 - docker engine
 - Add plugin
   - ```git submodule add https://github.com/umass-cs-security/CTFd-Docker-Challenges.git ./CTFd/plugins/docker_challenges```
