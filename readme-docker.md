@@ -21,6 +21,7 @@
 
 # Setup
 
+- `sudo chmod -R 700 /CTFd_Platform` to modify permission of the folder (user has full access)
 - docker registry
   - modify/create ```/etc/docker/daemon.json``` to allow docker engine manage localhost registry
     - ```{"insecure-registries" : [ "localhost:56156" ]}``` 
@@ -29,6 +30,7 @@
   - TODO: if registry is privileged, all image and ctfd platform also need to be privileged. (in other cases, either image will not be pushed to registry or platform cannot access/find images in registry.)
 - docker engine
 - Add plugin
+  - `git submodule update --init` to pull docker_challenge submodule in CTFd repo
   - ```git submodule add https://github.com/umass-cs-security/CTFd-Docker-Challenges.git ./CTFd/plugins/docker_challenges```
 - on mac you can use ```docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock``` to make docker engine listen to port 2375 and use it for http api
 - to delete repo from docker registry, use the ```delete.sh``` in ```./delete```
