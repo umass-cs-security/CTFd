@@ -69,6 +69,8 @@ CTFd/uploads
 .ctfd_secret_key
 .*.swp
 
+ctfd.db*
+
 # Vagrant
 .vagrant
 
