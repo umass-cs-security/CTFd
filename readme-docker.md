@@ -35,3 +35,5 @@
 - on mac you can use ```docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock``` to make docker engine listen to port 2375 and use it for http api
 - to delete repo from docker registry, use the ```delete.sh``` in ```./delete```
 - new dependency ```pyyaml```
+
+To check whether VM has correct setup after executing `./startup.sh`, issue `sudo lsof -i -P -n | grep LISTEN` to check what ports are mapped from caro-1 to VM. (Suppose have two => 8080:80 for CTFd Platform, and 56151:56151 for ssh connection to VM's student management docker container.)

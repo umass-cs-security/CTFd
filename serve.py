@@ -2,7 +2,9 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--port", help="Port for debug server to listen on", default=4000)
-parser.add_argument("--host", help="Host name for debug server to listen on", default="127.0.0.1")
+parser.add_argument(
+    "--host", help="Host name for debug server to listen on", default="127.0.0.1"
+)
 parser.add_argument(
     "--profile", help="Enable flask_profiler profiling", action="store_true"
 )
