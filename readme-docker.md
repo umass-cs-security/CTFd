@@ -24,6 +24,7 @@
   - ```brew install vagrant-vmware-utility```
   - ```vagrant install vagrant-vmware-desktop```
   - ```vagrant up --provider=vmware_fusion```
+- `sudo chmod -R 700 /CTFd_Platform` to modify permission of the folder (user has full access)
 - docker registry
   - auth: ```docker run --entrypoint htpasswd httpd:2 -Bbn <username> <password> > auth/htpasswd```
     - ```docker run --entrypoint htpasswd httpd:2 -Bbn labuser cs561labuser > auth/htpasswd```
@@ -37,9 +38,17 @@
   - TODO: if registry is privileged, all image and ctfd platform also need to be privileged. (in other cases, either image will not be pushed to registry or platform cannot access/find images in registry.)
 - docker engine
 - Add plugin
+  - `git submodule update --init` to pull docker_challenge submodule in CTFd repo
   - ```git submodule add https://github.com/umass-cs-security/CTFd-Docker-Challenges.git ./CTFd/plugins/docker_challenges```
 - on mac you can use ```docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock``` to make docker engine listen to port 2375 and use it for http api
 - to delete repo from docker registry, use the ```delete.sh``` in ```./delete```
 - new dependency ```pyyaml, docker```
   - ```pyyaml``` for parsing yaml file when importing challenge from ```meta.yaml``` file
   - ```docker``` python docker sdk for registry login
+
+To check whether VM has correct setup after executing `./startup.sh`, issue `sudo lsof -i -P -n | grep LISTEN` to check what ports are mapped from caro-1 to VM. (Suppose have two => 8080:80 for CTFd Platform, and 56151:56151 for ssh connection to VM's student management docker container.)
+
+## Notes
+- docker file need to have port `EXPOSE` and command `CMD` specified
+- docker-compose file should have `image` field with value `localhost:56156/<you image name>`
+- docker_config page is prefered to leave it along (but you need to select all needed images in the registry.)

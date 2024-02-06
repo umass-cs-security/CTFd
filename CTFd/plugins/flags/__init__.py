@@ -28,10 +28,14 @@ class CTFdStaticFlag(BaseFlag):
     }
 
     @staticmethod
-    def compare(chal_key_obj, provided):
+    def compare(chal_key_obj, provided, stored_flag: str = None):
         saved = chal_key_obj.content
         data = chal_key_obj.data
 
+        if stored_flag is not None:
+            saved = stored_flag
+
+        # print(f"saved: {saved}; submission: {provided}; data: {data}")
         if len(saved) != len(provided):
             return False
         result = 0
