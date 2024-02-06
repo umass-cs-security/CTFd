@@ -20,8 +20,16 @@
   - TODO: Add script ```view.js``` synced rather than async. User should direct see container info rather than click button to see it. (The problem is from the default behavior of ctfd platform not in script.)
 
 # Setup
-
+- vagrant
+  - ```brew install vagrant-vmware-utility```
+  - ```vagrant install vagrant-vmware-desktop```
+  - ```vagrant up --provider=vmware_fusion```
 - docker registry
+  - auth: ```docker run --entrypoint htpasswd httpd:2 -Bbn <username> <password> > auth/htpasswd```
+    - ```docker run --entrypoint htpasswd httpd:2 -Bbn labuser cs561labuser > auth/htpasswd```
+  - config file: ```{ "insecure-registries":["localhost:56156"] }```
+    - Mac config file is at ```~/.docker/daemon.json```
+    - Ubuntu config file is at ```/etc/docker/daemon.json```
   - modify/create ```/etc/docker/daemon.json``` to allow docker engine manage localhost registry
     - ```{"insecure-registries" : [ "localhost:56156" ]}``` 
     - ```sudo systemctl daemon-reload```
@@ -32,4 +40,6 @@
   - ```git submodule add https://github.com/umass-cs-security/CTFd-Docker-Challenges.git ./CTFd/plugins/docker_challenges```
 - on mac you can use ```docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 127.0.0.1:2375:2375 bobrik/socat TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock``` to make docker engine listen to port 2375 and use it for http api
 - to delete repo from docker registry, use the ```delete.sh``` in ```./delete```
-- new dependency ```pyyaml```
+- new dependency ```pyyaml, docker```
+  - ```pyyaml``` for parsing yaml file when importing challenge from ```meta.yaml``` file
+  - ```docker``` python docker sdk for registry login
