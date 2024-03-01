@@ -108,7 +108,6 @@ def test_ctftime_prevents_accessing_challenges_after_ctf():
     app = create_ctfd()
     with app.app_context():
         with ctftime.init():
-
             register_user(app)
             chal = gen_challenge(app.db)
             chal_id = chal.id
@@ -142,7 +141,6 @@ def test_ctf_started():
         assert ctf_started() is True
 
         with ctftime.init():
-
             with ctftime.not_started():
                 ctf_started()
                 assert ctf_started() is False
@@ -163,7 +161,6 @@ def test_ctf_ended():
     with app.app_context():
         assert ctf_ended() is False
         with ctftime.init():
-
             with ctftime.not_started():
                 assert ctf_ended() is False
 
